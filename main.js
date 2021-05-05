@@ -28,15 +28,17 @@ while (bombe.length < 16) {
 
 console.log(bombe);
 
+var bomba_presa = false;
 var arrayUtente = [];
-while (arrayUtente.length < (limit - 16)) {
-    var numeroUtente = Number(prompt("Inserisci un numero tra 1 e " + limit));
+while (arrayUtente.length < (limit - 16) && !bomba_presa) {
+    var numeroUtente = parseInt(prompt("Inserisci un numero tra 1 e " + limit));
     if (isNaN(numeroUtente) || numeroUtente > limit || numeroUtente < 1) {
         alert("Inserisci un numero tra 1 e " + limit);
     } else {
         if (bombe.includes(numeroUtente)) {
             alert("Hai beccato una bomba! Punti totali: " + arrayUtente.length);
-            break; //termina un ciclo (qui il while), c'è anche continue (salta alla prossima iterazione del ciclo)
+            //break; //termina un ciclo (qui il while), c'è anche continue (salta alla prossima iterazione del ciclo)
+            bomba_presa = true;
         } else if (!arrayUtente.includes(numeroUtente)) {
             arrayUtente.push(numeroUtente);
         } else {
@@ -47,6 +49,6 @@ while (arrayUtente.length < (limit - 16)) {
     
 }
 
-if (arrayUtente.length == (limit - 16)) {
+if (!bomba_presa) { //o (!bomba_presa) o (arrayUtente.length == (limit - 16))
     alert("Hai vinto! Punti totali: " + arrayUtente.length);
 }
